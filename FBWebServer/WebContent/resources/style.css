@@ -1,0 +1,82 @@
+#button {
+	background-color:#4ED1B7;
+	border-color:#26272B;
+}
+
+button {
+	background-color:#4ED1B7;
+	border-color:#26272B;
+}
+
+html, body {
+	color: black;
+	font-family: Tahoma,Helvetica,sans-serif;
+}
+
+#startYear, #endYear {
+	width: 60px;
+}
+
+#startMonth, #endMonth, #endDay, #startDay {
+	width: 30px;
+}
+
+a, a:visited, a:hover, a:active {
+	color: #4ED1B7;
+}
+
+#content {
+	overflow: auto;
+	color:white;
+	background-color:#26272B;
+	height:500px;
+	float:top;
+}
+
+#overLap {
+	background-color: #EC56A7;
+}
+
+#noOverLap {
+	background-color: #6B56EC;
+}
+
+#noOverLapMe {
+	background-color: #FFFF66;
+}
+
+#noOverLapOther {
+	background-color: #6B56EC;
+}
+
+#header {
+	background-color:#43474B;
+}
+
+#menu {
+	background-color:black;
+	width:150px;
+	height:500px;
+	float:left;
+	color:white;
+	font-size:70%;
+}
+
+#footer {
+	background-color:#43474B;
+	height:25px;
+	text-align:center;
+}
+
+h1 {
+	margin-bottom:0;
+	height:50px;
+}
+
+colgroup{
+	background-color:white;
+}
+
+thead {
+	background-color:rgb(204,230,255);
+}

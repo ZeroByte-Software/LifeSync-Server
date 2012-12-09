@@ -1,0 +1,38 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.0.3.xsd">
+ 
+	<http auto-config="true" use-expressions="true" >
+		<intercept-url pattern="/android/**" access="permitAll" />
+		<intercept-url pattern="/login" access="permitAll" />
+		<intercept-url pattern="/register*" access="permitAll" />
+		<intercept-url pattern="/register/new*" access="permitAll" />
+		<intercept-url pattern="/loginfailed" access="permitAll" />
+		<intercept-url pattern="/adminPage" access="hasAnyRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
+		<form-login login-page="/login" default-target-url="/main"
+			authentication-failure-url="/loginfailed" always-use-default-target="true" />
+		<logout logout-success-url="/logon" />
+	</http>
+ 
+	<authentication-manager>
+	  <authentication-provider>
+	    <jdbc-user-service data-source-ref="DataSource"
+ 
+		    users-by-username-query="
+		      select email,password, enabled 
+		      from AppUser where email=?" 
+ 
+		   authorities-by-username-query="
+		      select email, authority from AppUser 
+		      where email =?  " 
+ 
+		/>
+	  </authentication-provider>
+	</authentication-manager>
+ 
+</beans:beans>

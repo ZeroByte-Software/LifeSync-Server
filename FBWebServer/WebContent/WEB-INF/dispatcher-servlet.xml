@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p">	    
+    
+    <context:component-scan base-package="com.zerobyte.lifesync.controller" />
+    
+    <bean id="viewResolver"
+			class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+	
+	<bean id="urlMapping"
+			class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">
+			<map>		
+				<entry key="/">
+					<ref bean="defaultController"/>
+				</entry>
+				<entry key="/android">
+					<ref bean="androidController"/>
+				</entry>
+				<entry key="/schedules">
+					<ref bean="scheduleController"/>
+				</entry>	
+				<entry key="/schedules/*">
+					<ref bean="scheduleController"/>
+				</entry>
+				<entry key="/friendList">
+					<ref bean="friendListController"/>
+				</entry>
+				<entry key="/friendList/*">
+					<ref bean="friendListController"/>
+				</entry>
+				<entry key="/userAcc">
+					<ref bean="userAccController"/>
+				</entry>
+				<entry key="/userAcc/*">
+					<ref bean="userAccController"/>
+				</entry>
+				<entry key="/adminPage">
+					<ref bean="adminController"/>
+				</entry>
+				<entry key="/adminPage*">
+					<ref bean="adminController"/>
+				</entry>				
+			</map>			
+		</property>		 	
+	</bean>
+	
+	<bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+            <!-- JDBC configurations -->
+               <property name="driverClass" value="com.mysql.jdbc.Driver" />
+               <property name="jdbcUrl" value="jdbc:mysql://REMOVED" />
+               <property name="user" value="REMOVED" />
+               <property name="password" value="REMOVED" />
+               
+               <property name="minPoolSize" value="1" />
+               <property name="maxPoolSize" value="3" />
+               <property name="initialPoolSize" value="1" />
+               <property name="acquireIncrement" value="1" />
+               <property name="maxConnectionAge" value="1800" />
+    </bean>
+	
+	<bean id="userDao" class="com.zerobyte.lifesync.dataaccess.UserDao">
+		<property name="dataSource" ref ="DataSource"/>	 
+	</bean>
+		
+	<bean id="defaultController" class="com.zerobyte.lifesync.controller.DefaultController">	</bean>
+	
+	<bean id="scheduleController" class="com.zerobyte.lifesync.controller.ScheduleController">	</bean>
+	
+	<bean id="friendListController" class="com.zerobyte.lifesync.controller.FriendListController">	</bean>
+	
+	<bean id="userAccController" class="com.zerobyte.lifesync.controller.UserAccController">	</bean>
+	
+	<bean id="adminController" class="com.zerobyte.lifesync.controller.AdminController">	</bean>
+	
+	<bean id="androidController" class="com.zerobyte.lifesync.controller.AndroidController">	</bean>
+	
+	<mvc:annotation-driven/>
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+</beans>
